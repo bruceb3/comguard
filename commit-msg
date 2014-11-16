@@ -16,6 +16,15 @@
 #> commit.  The hook is allowed to edit the commit message file.
 #
 
+# TODO:
+#
+# * Format the body and footer comments to be 72 columns in width.
+#  - need to leave existing indentation intact.
+#
+# * Make sure that there is only two blank lines in the commit messages.
+#
+# * Remove trailing blanks lines.
+
 $failed = false
 
 commit_log_messages = ARGV[0] or abort "missing commit log message filename"
