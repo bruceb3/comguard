@@ -18,8 +18,4 @@ def run_commit_msg cmd: './commit-msg', args: []
     status = $?
   end
   return cat(stdoutf), cat(stderrf)
-  ensure
-    File.unlink stdoutf
-    File.unlink stderrf
-  end
 end
