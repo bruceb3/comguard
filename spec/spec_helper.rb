@@ -19,3 +19,10 @@ def run_commit_msg cmd: './commit-msg', args: []
   end
   return cat(stdoutf), cat(stderrf)
 end
+
+def make_file_with *lines
+  fh = Tempfile.new('commit-msg-contents')
+  lines.each {|l| fh.puts l}
+  fh.close
+  fh.path
+end
