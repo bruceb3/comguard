@@ -31,4 +31,10 @@ describe "commit-msg" do
     expect(status.exitstatus).to eq 1
     expect(stderr.first).to match(/invalid commit type/)
   end
+
+  it "should work when given a valid type" do
+    input_file = make_file_with('feat(scope): good message')
+    stdout, stderr, status = run_commit_msg args: input_file
+    expect(status.exitstatus).to eq 0
+  end
 end
