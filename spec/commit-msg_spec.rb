@@ -9,4 +9,11 @@ describe "commit-msg" do
     expect(stderr.first).to match(/missing commit log message/)
     expect(stdout).to eq []
   end
+
+  it "should write out the commit messages log" do
+    input_file = make_file_with('stuff')
+    stdout, stderr = run_commit_msg
+    expect(cat(input_file).first).to match(/stuff/)
+  end
+
 end
