@@ -37,4 +37,10 @@ describe "commit-msg" do
     stdout, stderr, status = run_commit_msg args: input_file
     expect(status.exitstatus).to eq 0
   end
+
+  it "should work when scope has a hyphen" do
+    input_file = make_file_with('feat(with-hyphen): good message')
+    stdout, stderr, status = run_commit_msg args: input_file
+    expect(status.exitstatus).to eq 0
+  end
 end

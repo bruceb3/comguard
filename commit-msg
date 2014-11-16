@@ -47,7 +47,7 @@ end
 #   chore -> maintenance
 
 valid_types = %w( feat fix docs style ref rest chore )
-if matches = commit_log[0].match(/^(?<type>\w+)\((?<scope>\w+)\): (?<message>.*)/)
+if matches = commit_log[0].match(/^(?<type>\w+)\((?<scope>[\w-]+)\): (?<message>.*)/)
   if not valid_types.include?(matches[:type])
     abort "invalid commit type"
   end
