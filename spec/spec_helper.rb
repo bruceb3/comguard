@@ -5,8 +5,7 @@ def cat filename
   File.readlines(filename).map! {|l| l.chomp! }
 end
 
-def run_commit_msg cmd='./commit-msg', args=[]
-  begin
+def run_commit_msg cmd: './commit-msg', args: []
   stdoutf, stderrf = Tempfile.new('commit-msg.stdout').path, Tempfile.new('commit-msg.stderr').path
   pid = fork
   if pid == nil
