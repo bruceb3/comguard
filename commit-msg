@@ -23,11 +23,9 @@ commit_log_messages = ARGV[0] or abort "missing commit log message filename"
 commit_log = File.readlines(commit_log_messages).map(&:chomp)
 
 # check for upper case characters.
-if commit_log[0]
-  if commit_log[0].match(/[A-Z]/)
-    puts "first-line: no upper case characters"
-    commit_log[0].downcase!
-  end
+if commit_log[0].match(/[A-Z]/)
+  puts "first-line: no upper case characters"
+  commit_log[0].downcase!
 end
 
 # Need to write changes to the commit messages for git to use.
