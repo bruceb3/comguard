@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe "commit-msg" do
   it "should abort if not given a filename as the first arg" do
-    stdout, stderr = run_commit_msg
+    stdout, stderr, status = run_commit_msg
     expect(stderr.first).to match(/missing commit log message/)
     expect(stdout).to eq []
   end

@@ -17,7 +17,7 @@ def run_commit_msg cmd: './commit-msg', args: []
     Process.waitpid pid
     status = $?
   end
-  return cat(stdoutf), cat(stderrf)
+  return cat(stdoutf), cat(stderrf), status
 end
 
 def make_file_with *lines
