@@ -4,6 +4,13 @@ require 'spec_helper'
 # Instead the commit-msg script will be called and the output parsed.
 
 describe "commit-msg" do
+  it "should write out the commit messages log" do
+    input_file = make_file_with('stuff')
+    stdout, stderr, status = run_commit_msg args: input_file
+    expect(status.exitstatus).to eq 0
+    expect(cat(input_file).first).to match(/stuff/)
+  end
+
   it "should abort if not given a filename as the first arg" do
     stdout, stderr, status = run_commit_msg
     expect(stderr.first).to match(/missing commit log message/)
@@ -11,15 +18,11 @@ describe "commit-msg" do
     expect(status.exitstatus).to eq 1
   end
 
-  it "should write out the commit messages log" do
-    input_file = make_file_with('stuff')
-    stdout, stderr, status = run_commit_msg
-    expect(cat(input_file).first).to match(/stuff/)
-  end
-
   it "should convert uppercase to lower case on the first line" do
     input_file = make_file_with('AAAAA')
     stdout, stderr, status = run_commit_msg args: input_file
     expect(cat(input_file).first).to match(/aaaaa/)
+    expect(status.exitstatus).to eq 0
   end
+
 end
