@@ -11,7 +11,7 @@ def run_commit_msg cmd='./commit-msg', args=[]
   pid = fork
   if pid == nil
     $stdout.reopen stdoutf
-    $stdout.reopen stderrf
+    $stderr.reopen stderrf
     exec cmd, *args
     abort "exec failed"
   else

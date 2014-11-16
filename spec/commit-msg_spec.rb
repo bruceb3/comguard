@@ -4,9 +4,9 @@ require 'spec_helper'
 # Instead the commit-msg script will be called and the output parsed.
 
 describe "commit-msg" do
-  it "should run but have no output" do
+  it "should abort if not given a filename as the first arg" do
     stdout, stderr = run_commit_msg
+    expect(stderr.first).to match(/missing commit log message/)
     expect(stdout).to eq []
-    expect(stderr).to eq []
   end
 end
