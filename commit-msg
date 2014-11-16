@@ -16,6 +16,8 @@
 #> commit.  The hook is allowed to edit the commit message file.
 #
 
+$failed = false
+
 commit_log_messages = ARGV[0] or abort "missing commit log message filename"
 
 commit_log = File.readlines(commit_log_messages).map(&:chomp)
@@ -32,3 +34,5 @@ end
 File.open(commit_log_messages, 'w+') do |fh|
   commit_log.each { |line| fh.puts line }
 end
+
+exit $failed ? 0 : 1

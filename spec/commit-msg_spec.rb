@@ -8,6 +8,7 @@ describe "commit-msg" do
     stdout, stderr, status = run_commit_msg
     expect(stderr.first).to match(/missing commit log message/)
     expect(stdout).to eq []
+    expect(status.exitstatus).to eq 1
   end
 
   it "should write out the commit messages log" do
