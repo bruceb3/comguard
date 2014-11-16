@@ -35,4 +35,4 @@ File.open(commit_log_messages, 'w+') do |fh|
   commit_log.each { |line| fh.puts line }
 end
 
-exit $failed ? 0 : 1
+exit $failed ? 1 : 0
