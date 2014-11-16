@@ -37,6 +37,24 @@ if commit_log[0].match(/[A-Z]/)
   commit_log[0].downcase!
 end
 
+# Valid types are;
+#   feat -> feature
+#   fix -> bug fix
+#   docs -> documentation
+#   style -> formatting
+#   ref -> refactoring code
+#   test -> adding missing tests
+#   chore -> maintenance
+
+valid_types = %w( feat fix docs style ref rest chore )
+if matches = commit_log[0].match(/^(?<type>\w+)\((?<scope>\w+)\): (?<message>.*)/)
+  if not valid_types.include?(matches[:type])
+    abort "invalid commit type"
+  end
+else
+  abort "invalid first line"
+end
+
 # Need to write changes to the commit messages for git to use.
 File.open(commit_log_messages, 'w+') do |fh|
   commit_log.each { |line| fh.puts line }

@@ -5,10 +5,10 @@ require 'spec_helper'
 
 describe "commit-msg" do
   it "should write out the commit messages log" do
-    input_file = make_file_with('stuff')
+    input_file = make_file_with('feat(scope): message message')
     stdout, stderr, status = run_commit_msg args: input_file
     expect(status.exitstatus).to eq 0
-    expect(cat(input_file).first).to match(/stuff/)
+    expect(cat(input_file).first).to match(/message message/)
   end
 
   it "should abort if not given a filename as the first arg" do
@@ -19,10 +19,16 @@ describe "commit-msg" do
   end
 
   it "should convert uppercase to lower case on the first line" do
-    input_file = make_file_with('AAAAA')
+    input_file = make_file_with('feat(scope): Message Message')
     stdout, stderr, status = run_commit_msg args: input_file
-    expect(cat(input_file).first).to match(/aaaaa/)
+    expect(cat(input_file).first).to match(/message message/)
     expect(status.exitstatus).to eq 0
   end
 
+  it "should fail when given invalid type" do
+    input_file = make_file_with('badtype(scope): message message')
+    stdout, stderr, status = run_commit_msg args: input_file
+    expect(status.exitstatus).to eq 1
+    expect(stderr.first).to match(/invalid commit type/)
+  end
 end
