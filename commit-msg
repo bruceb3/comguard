@@ -25,7 +25,7 @@
 #   test -> adding missing tests
 #   chore -> maintenance
 
-$valid_types = %w( feat fix docs style ref rest chore )
+$valid_types = %w( feat fix docs style ref test chore )
 
 def die msg
   $stderr.puts msg

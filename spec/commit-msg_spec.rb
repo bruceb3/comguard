@@ -42,4 +42,11 @@ describe "commit-msg" do
     stdout, stderr, status = run_commit_msg args: input_file
     expect(status.exitstatus).to eq 0
   end
+
+  it "needs to display the valid types separated by spaces" do
+    input_file = make_file_with('this will fail')
+    stdout, stderr, status = run_commit_msg args: input_file
+    expect(status.exitstatus).to eq 1
+    expect(stderr[1]).to match(/ feat fix docs style ref test chore/)
+  end
 end
