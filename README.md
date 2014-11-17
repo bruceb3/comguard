@@ -9,6 +9,6 @@ Checkout the reposity and copy the file commit-msg into the .git/hooks directory
 
 ## Definition
 
-To see what constitutjes a valid commit check out the style guide below.
+To see what constitutes a valid commit check out the style guide below.
 
 http://docs.deis.io/en/latest/contributing/standards/#commit-style-guide
