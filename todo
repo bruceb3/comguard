@@ -1,0 +1,10 @@
+TODO:
+
+* fail if the first line is more than 52-ish characters long.
+
+* Format the body and footer comments to be 72 columns in width.
+ - need to leave existing indentation intact.
+
+* Make sure that there is only two blank lines in the commit messages.
+
+* Remove trailing blanks lines.
