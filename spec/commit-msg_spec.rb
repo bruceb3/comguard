@@ -13,8 +13,7 @@ describe "commit-msg" do
 
   it "should abort if not given a filename as the first arg" do
     stdout, stderr, status = run_commit_msg
-    expect(stderr.first).to match(/missing commit log message/)
-    expect(stdout.first).to match(/Expected types/)
+    expect(stderr.first).to match(/MISSING COMMIT LOG MESSAGE/)
     expect(status.exitstatus).to eq 1
   end
 
@@ -29,7 +28,7 @@ describe "commit-msg" do
     input_file = make_file_with('badtype(scope): message message')
     stdout, stderr, status = run_commit_msg args: input_file
     expect(status.exitstatus).to eq 1
-    expect(stderr.first).to match(/invalid commit type/)
+    expect(stderr.first).to match(/INVALID COMMIT TYPE/)
   end
 
   it "should work when given a valid type" do

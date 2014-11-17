@@ -27,23 +27,24 @@
 
 $valid_types = %w( feat fix docs style ref rest chore )
 
-def usage
-  puts "Expected types: #{$valid_types.join(' ')}"
-  puts <<DDD
+def die msg
+  $stderr.puts msg
+  $stderr.puts "Expected types: #{$valid_types.join(' ')}"
+  $stderr.puts <<DDD
 {type}({scope}): {subject}
 <BLANK LINE>
 {body}
 <BLANK LINE>
 {footer}
 DDD
+  exit 1
 end
 
 $failed = false
 
 commit_log_messages = ARGV[0]
 if not commit_log_messages
-  usage
-  abort "missing commit log message filename"
+  die "MISSING COMMIT LOG MESSAGE FILENAME"
 end
 
 commit_log = File.readlines(commit_log_messages).map(&:chomp)
@@ -56,12 +57,10 @@ end
 
 if matches = commit_log[0].match(/^(?<type>\w+)\((?<scope>[\w-]+)\): (?<message>.*)/)
   if not $valid_types.include?(matches[:type])
-    usage
-    abort "invalid commit type"
+    die "INVALID COMMIT TYPE"
   end
 else
-  usage
-  abort "invalid first line"
+  die "INVALID FIRST LINE"
 end
 
 # Need to write changes to the commit messages for git to use.
