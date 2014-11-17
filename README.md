@@ -1,7 +1,7 @@
 comguard
 ========
 
-Enforce useful commit messages with git, by using a commmit hook.
+Use a commit hook to enforce useful commit messages with git.
 
 ## Installation
 
