@@ -1,11 +1,5 @@
 #!/usr/bin/env ruby
 #
-# Using ruby for this script.
-# --------------------------
-#
-# To reduce the likelihood of having trouble running this script, only
-# standard features of older versions of ruby will be used.
-#
 # From the commit-msg.sample;
 # --------------------------
 #
