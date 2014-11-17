@@ -14,7 +14,7 @@ describe "commit-msg" do
   it "should abort if not given a filename as the first arg" do
     stdout, stderr, status = run_commit_msg
     expect(stderr.first).to match(/missing commit log message/)
-    expect(stdout).to eq []
+    expect(stdout.first).to match(/Expected types/)
     expect(status.exitstatus).to eq 1
   end
 

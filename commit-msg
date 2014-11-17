@@ -16,19 +16,6 @@
 #> commit.  The hook is allowed to edit the commit message file.
 #
 
-
-$failed = false
-
-commit_log_messages = ARGV[0] or abort "missing commit log message filename"
-
-commit_log = File.readlines(commit_log_messages).map(&:chomp)
-
-# check for upper case characters.
-if commit_log[0].match(/[A-Z]/)
-  puts "first-line: no upper case characters"
-  commit_log[0].downcase!
-end
-
 # Valid types are;
 #   feat -> feature
 #   fix -> bug fix
@@ -38,12 +25,42 @@ end
 #   test -> adding missing tests
 #   chore -> maintenance
 
-valid_types = %w( feat fix docs style ref rest chore )
+$valid_types = %w( feat fix docs style ref rest chore )
+
+def usage
+  puts "Expected types: #{$valid_types.join(' ')}"
+  puts <<DDD
+{type}({scope}): {subject}
+<BLANK LINE>
+{body}
+<BLANK LINE>
+{footer}
+DDD
+end
+
+$failed = false
+
+commit_log_messages = ARGV[0]
+if not commit_log_messages
+  usage
+  abort "missing commit log message filename"
+end
+
+commit_log = File.readlines(commit_log_messages).map(&:chomp)
+
+# check for upper case characters.
+if commit_log[0].match(/[A-Z]/)
+  puts "first-line: no upper case characters"
+  commit_log[0].downcase!
+end
+
 if matches = commit_log[0].match(/^(?<type>\w+)\((?<scope>[\w-]+)\): (?<message>.*)/)
-  if not valid_types.include?(matches[:type])
+  if not $valid_types.include?(matches[:type])
+    usage
     abort "invalid commit type"
   end
 else
+  usage
   abort "invalid first line"
 end
 
